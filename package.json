@@ -1,0 +1,27 @@
+{
+  "name": "sdesignnodeserver",
+  "version": "1.0.0",
+  "description": "sDesign 노드 api 서버",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmdwo5811/sDesignNodeServer.git"
+  },
+  "keywords": [
+    "node",
+    "api",
+    "server"
+  ],
+  "author": "santj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tmdwo5811/sDesignNodeServer/issues"
+  },
+  "homepage": "https://github.com/tmdwo5811/sDesignNodeServer#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
