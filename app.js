@@ -8,7 +8,7 @@ const db = mongoose.connection;
 
 
 require('./routes')(app);
-
+const docs = require('./routes/swagger.route');
 const mongoUrl = `mongodb+srv://nodeapi:nC7ZznzhonIg15hd@sDesign.8etgi.mongodb.net/sdesign?retryWrites=true&w=majority`;
 const mongoOptions = {
     useNewUrlParser: true,
@@ -21,8 +21,6 @@ db.once('open', () => {
 mongoose.connect(
     mongoUrl,mongoOptions
 );
-
-
 
 const server = http.createServer(app);
 const port = 2500;
