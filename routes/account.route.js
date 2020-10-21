@@ -5,8 +5,8 @@ const accountController = require('../controllers/account.controller');
 module.exports = (router) => {
     router.route("/join")
     .post(accountController.createAccount);
-    router.route("/login")
-    .post(accountController.accountLogin);
+    // router.route("/login")
+    // .post(accountController.accountLogin);
 
     return router;
 }

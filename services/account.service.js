@@ -2,9 +2,11 @@
 const accountRepository = require('../repositories/account.repository');
 
 
-exports.accountCreate = async (accountEmail, accountPw, accountName) => {
+exports.createAccount = async (accountEmail, accountPw, accountName) => {
     try {
-        const result = await 
+        const query = {accountEmail, accountPw, accountName};
+        const result = await accountRepository.create(query);
+        return result;
     } catch (e) {
         console.log(e);
         throw e;

@@ -9,10 +9,17 @@ const db = mongoose.connection;
 
 require('./routes')(app);
 
-const mongoUrl = ``;
+const mongoUrl = `mongodb+srv://nodeapi:nC7ZznzhonIg15hd@sDesign.8etgi.mongodb.net/sdesign?retryWrites=true&w=majority`;
+const mongoOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+    console.log('Connected to sDesign mongod Server.');
+})
 mongoose.connect(
-    mongoUrl,{useNewUrlParser: true}
+    mongoUrl,mongoOptions
 );
 
 
