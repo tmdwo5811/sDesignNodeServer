@@ -2,11 +2,12 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 const http = require('http');
 const app = express();
 const db = mongoose.connection;
 
-
+app.use(bodyParser.json());
 require('./routes')(app);
 const docs = require('./routes/swagger.route');
 const mongoUrl = `mongodb+srv://nodeapi:nC7ZznzhonIg15hd@sDesign.8etgi.mongodb.net/sdesign?retryWrites=true&w=majority`;

@@ -16,6 +16,18 @@ const accountSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        isAcceptEmail: {
+            type: Boolean,
+        },
+        isExit: {
+            type: Boolean,
+        },
+        created: {
+            type: Number
+        },
+        updated: {
+            type: Number
+        }
     },{versionKey: false}
 );
 
