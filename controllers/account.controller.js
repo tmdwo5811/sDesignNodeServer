@@ -14,7 +14,10 @@ const transporter = nodeMailer.createTransport({
 exports.createAccount = async (req, res, next) => {
     try {
         let {accountEmail, accountPw, accountName} = req.body;
-        accountPw = await accountService.pwConvertToHash(accountPw); 
+        console.log(accountPw);
+        console.log(typeof accountPw);
+        console.log(accountPw.toString());
+        accountPw = await accountService.pwConvertToHash(accountPw.toString()); 
         const result = await accountService.createAccount(accountEmail, accountPw, accountName);
         if(result) {
             const mailOption = {
