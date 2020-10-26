@@ -24,7 +24,7 @@ exports.createAccount = async (req, res, next) => {
                 from: '',
                 to: accountEmail,
                 subject: 'Welcome to SignUp sDesign',
-                html:`<h1>sDesign 이메일 인증 부탁해요~!</h1><br><a href="http://localhost:2500/api/confirm/account?hashValue=${result[0]._id+'1'}">이곳을 눌러 인증!</a>`
+                html:`<h1>sDesign 이메일 인증 부탁해요~!</h1><br><a href="http://limeprj.xyz:2500/api/confirm/account?hashValue=${result[0]._id+'1'}">이곳을 눌러 인증!</a>`
             }
             await transporter.sendMail(mailOption);
         }
