@@ -2,11 +2,14 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const http = require('http');
 const app = express();
 const db = mongoose.connection;
 
+
+app.use(cors());
 app.use(bodyParser.json());
 require('./routes')(app);
 const docs = require('./routes/swagger.route');
