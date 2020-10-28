@@ -54,9 +54,15 @@ exports.accountLogin = async (req, res, next) => {
         console.log(userInfo);
         const canLogin = await accountService.verifyPwhash(accountPw, userInfo.accountPw);
         console.log(canLogin);
-        if(!canLogin) return res.send('아이디 혹은 비밀번호가 옮바르지 않습니다.');
+        if(!canLogin) return res.send('5504');
         const token = await tokenController.newToken(userInfo);
-        return res.send(token);
+        const result = {
+            token, //token: token
+            accountEmail: userInfo.accountEmail,
+            accountName: userInfo.accountName,
+            accountId: userInfo._id+1
+        }
+        return res.send(result);
     } catch (e) {
         console.log(e);
         next(e);
