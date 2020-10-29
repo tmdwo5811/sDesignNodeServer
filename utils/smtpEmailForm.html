@@ -1,0 +1,8 @@
+<script>
+    async function confirmAccount(hashValue) {
+        const result = await fetch(`http://limeprj.xyz:2500/api/confirm/account?hashValue=${hashValue}`);
+        if(result) window.location.href="https://www.naver.com"
+    }
+</script>
+
+<h1>sDesign 이메일 인증 부탁해요~!</h1><br><button onclick="confirmAccount()">이곳을 눌러 인증!</button>

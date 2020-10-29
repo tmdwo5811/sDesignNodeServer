@@ -14,12 +14,10 @@ const transporter = nodeMailer.createTransport({
 exports.createAccount = async (req, res, next) => {
     try {
         let {accountEmail, accountPw, accountName} = req.body;
-        console.log(accountPw);
-        console.log(typeof accountPw);
-        console.log(accountPw.toString());
         accountPw = await accountService.pwConvertToHash(accountPw.toString()); 
         const result = await accountService.createAccount(accountEmail, accountPw, accountName);
-        if(result) {
+        if(result.code == 11000 || result.code == "11000") return res.send("3588")
+        if(!result.code) {
             const mailOption = {
                 from: '',
                 to: accountEmail,
@@ -30,7 +28,6 @@ exports.createAccount = async (req, res, next) => {
         }
         return res.send(result);
     } catch (e) {
-        console.log(e);
         next(e);
     }
 }
@@ -39,8 +36,8 @@ exports.confirmAccount = async (req, res, next) => {
     try {
         const {hashValue} = req.query;
         const accountId = hashValue.substring(0, hashValue.length -1);
-        const result = await accountService.confirmAccount(accountId);
-        return res.send(result);
+        await accountService.confirmAccount(accountId);
+        return res.redirect("https://www.naver.com");
     } catch (e) {
         console.log(e);
         next(e);

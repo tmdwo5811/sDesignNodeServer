@@ -34,8 +34,7 @@ exports.createAccount = async (accountEmail, accountPw, accountName) => {
         const result = await accountRepository.create(query);
         return result;
     } catch (e) {
-        console.log(e);
-        throw e;
+        return e;
     }
 }
 
