@@ -11,6 +11,8 @@ const db = mongoose.connection;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.set('views', __dirname+'/utils');
+app.engine('html', require('ejs').renderFile);
 require('./routes')(app);
 const docs = require('./routes/swagger.route');
 const mongoUrl = `mongodb+srv://nodeapi:nC7ZznzhonIg15hd@sDesign.8etgi.mongodb.net/sdesign?retryWrites=true&w=majority`;
