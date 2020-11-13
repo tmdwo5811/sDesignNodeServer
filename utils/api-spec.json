@@ -109,6 +109,31 @@
           }
         }
       },
+      "/api/upload/file": {
+        "post": {
+          "tags": [
+            "Upload"
+          ],
+          "description": "파일 업로드시 사용되는 api 입니다.",
+          "consumes":"multipart/form-data",
+          "parameters": [
+            {
+              "name": "userFile",
+              "in": "formData",
+              "type": "file"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "[완료] 업로드가 성공 되었습니다.",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            }
+          }
+        }
+      },
       "/api/token/test": {
         "get": {
           "tags": [

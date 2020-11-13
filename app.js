@@ -11,7 +11,8 @@ const db = mongoose.connection;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.set('views', __dirname+'/utils');
+app.set('views', __dirname + '/utils');
+app.use(express.static('files'));
 app.engine('html', require('ejs').renderFile);
 require('./routes')(app);
 const docs = require('./routes/swagger.route');
