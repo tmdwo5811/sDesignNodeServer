@@ -19,7 +19,7 @@ const uploadController = require('../controllers/upload.controller');
 module.exports = (router) => {
     router.route("/upload/file")
     .post(
-        // tokenController.verifyToken,
+        tokenController.verifyToken,
         upload.single('userFile'),
         uploadController.uploadFile
     );
