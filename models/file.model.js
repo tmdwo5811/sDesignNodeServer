@@ -1,41 +1,33 @@
-// const mongoose = require('mongoose');
-// const MongoPaging = require('mongo-cursor-pagination');
+const mongoose = require('mongoose');
+const MongoPaging = require('mongo-cursor-pagination');
 
-// const accountSchema = new mongoose.Schema(
-//     {
-//         accountEmail: {
-//             type: String,
-//             required: true,
-//             unique: true
-//         },
-//         accountPw: {
-//             type: String,
-//             required: true,
-//         },
-//         accountName: {
-//             type: String,
-//             required: true
-//         },
-//         isAcceptEmail: {
-//             type: Boolean,
-//         },
-//         isExit: {
-//             type: Boolean,
-//         },
-//         created: {
-//             type: Number
-//         },
-//         updated: {
-//             type: Number
-//         }
-//     },{versionKey: false}
-// );
+const fileSchema = new mongoose.Schema(
+    {
+        accountId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'account',
+            required: true,
+        },
+        created: {
+            type: Number
+        },
+        fileName: {
+            type: String
+        },
+        filePath: {
+            type: String
+        },
+        soundName: {
+            type: String
+        }
+    },{versionKey: false}
+);
 
 
 
-// accountSchema.index({accountEmail: 1});
-// accountSchema.plugin(MongoPaging.mongoosePlugin);
+accountSchema.index({accountEmail: 1});
+accountSchema.plugin(MongoPaging.mongoosePlugin);
 
-// mongoose.set('useCreateIndex', true);
-// const AccountModel = mongoose.model('account', accountSchema, 'account');
-// module.exports = AccountModel;
+mongoose.set('useCreateIndex', true);
+const FileModel = mongoose.model('file', fileSchema, 'file');
+module.exports = FileModel;
