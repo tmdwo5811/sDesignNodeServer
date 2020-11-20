@@ -25,8 +25,8 @@ const fileSchema = new mongoose.Schema(
 
 
 
-accountSchema.index({accountEmail: 1});
-accountSchema.plugin(MongoPaging.mongoosePlugin);
+fileSchema.index({accountEmail: 1});
+fileSchema.plugin(MongoPaging.mongoosePlugin);
 
 mongoose.set('useCreateIndex', true);
 const FileModel = mongoose.model('file', fileSchema, 'file');
