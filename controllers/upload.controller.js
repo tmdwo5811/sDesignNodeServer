@@ -40,3 +40,16 @@ exports.getFile = async (req, res, next) => {
         next(e)
     }
 }
+
+exports.getSoundList = async (req, res, next) => {
+    try {
+        const { next, previous } = req.query;
+        const result = await fileService.getSoundList(next, previous);
+        return res.send({
+            result
+        });
+    } catch (e) {
+        console.log(e);
+        next(e);
+    }
+}

@@ -11,3 +11,18 @@ exports.create = async (query) => {
         throw e;
     }
 }
+
+exports.paginate = async (query, options, next, previous) => {
+    try {
+        const result = await fileModel.paginate({
+            query,
+            next,
+            previous,
+            limit: options.limit
+        })
+        return result;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}

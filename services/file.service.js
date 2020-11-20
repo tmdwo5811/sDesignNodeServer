@@ -11,3 +11,14 @@ exports.createFileInfo = async (accountId, filename, filePath, soundName) => {
         throw e;
     }
 }
+
+exports.getSoundList = async ( next, previous ) => {
+    try {
+        const query = {};
+        const paginated = await fileRepository.paginate(query, {limit: 15}, next, previous);
+        return paginated;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}

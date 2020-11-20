@@ -14,22 +14,26 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 const tokenController = require('../controllers/token.controller');
-const uploadController = require('../controllers/upload.controller');
+const fileController = require('../controllers/upload.controller');
 
 module.exports = (router) => {
     router.route("/upload/file")
     .post(
         tokenController.verifyToken,
         upload.single('userFile'),
-        uploadController.uploadFile
+        fileController.uploadFile
     );
     router.route("/load/upload/page")
     .get(
-        uploadController.loadUploadPage
+        fileController.loadUploadPage
     )
     router.route("/get/file/:fileName")
     .get(
-        uploadController.getFile
+        fileController.getFile
+    )
+    router.route("/get/soundList")
+    .get(
+        fileController.getSoundList
     )
 
     return router;
