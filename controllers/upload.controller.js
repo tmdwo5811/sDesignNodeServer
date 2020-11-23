@@ -5,7 +5,7 @@ const fileService = require('../services/file.service');
 exports.uploadFile = async (req, res, next) => {
     try {
         const { accountId } = req;
-        const {soundName} = req.body;
+        const { soundName } = req.body;
         if (!req.file) return res.send('파일을 업로드 해주세요.');
         const filePath = `http://lime-prj.xyz:2500/api/get/file/${req.file.filename}`;
         const uploadStatus = await fileService.createFileInfo(accountId, req.file.filename, filePath, soundName);

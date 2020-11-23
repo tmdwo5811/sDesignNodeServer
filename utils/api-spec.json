@@ -72,14 +72,13 @@
               "name": "data",
               "in": "body",
               "type": "object",
+              "required":true,
               "properties": {
                 "accountEmail": {
-                  "type": "string",
-                  "required": true
+                  "type": "string"
                 },
                 "accountPw": {
-                  "type": "string",
-                  "required": true
+                  "type": "string"
                 }
               }
             }
@@ -118,9 +117,28 @@
           "consumes":"multipart/form-data",
           "parameters": [
             {
+              "name": "token",
+              "in": "header",
+              "type": "string",
+              "description":"jwt Token",
+              "required": true
+            },
+            {
               "name": "userFile",
               "in": "formData",
-              "type": "file"
+              "type": "file",
+              "required":true
+            },
+            {
+              "name": "soundName",
+              "in": "body",
+              "type": "object",
+              "required":true,
+              "properties":{
+                "soundName":{
+                  "type":"string"
+                }
+              }
             }
           ],
           "responses": {
