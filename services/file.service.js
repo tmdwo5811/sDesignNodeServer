@@ -1,9 +1,10 @@
 'use struct'
+const { replaceOne } = require('../models/file.model');
 const fileRepository = require('../repositories/file.repository');
 
 exports.createFileInfo = async (accountId, filename, filePath, soundName) => {
     try {
-        const query = {accountId, fileName: filename, filePath, soundName, created: new Date.now()};
+        const query = {accountId: accountId.slice(0, -1), fileName: filename, filePath, soundName, created: Date.now()};
         const result = await fileRepository.create(query);
         return result;
     } catch (e) {

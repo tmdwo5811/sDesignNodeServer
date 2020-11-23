@@ -5,8 +5,7 @@ const fileSchema = new mongoose.Schema(
     {
         accountId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'account',
-            required: true,
+            ref: 'account'
         },
         created: {
             type: Number
@@ -25,7 +24,7 @@ const fileSchema = new mongoose.Schema(
 
 
 
-fileSchema.index({accountEmail: 1});
+fileSchema.index({accountId: 1});
 fileSchema.plugin(MongoPaging.mongoosePlugin);
 
 mongoose.set('useCreateIndex', true);

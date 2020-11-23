@@ -119,9 +119,9 @@
             {
               "name": "token",
               "in": "header",
-              "type": "string",
               "description":"jwt Token",
-              "required": true
+              "required": true,
+              "type": "string"
             },
             {
               "name": "userFile",
@@ -131,14 +131,9 @@
             },
             {
               "name": "soundName",
-              "in": "body",
-              "type": "object",
-              "required":true,
-              "properties":{
-                "soundName":{
-                  "type":"string"
-                }
-              }
+              "in": "formData",
+              "type": "string",
+              "required":true
             }
           ],
           "responses": {
