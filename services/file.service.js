@@ -2,9 +2,9 @@
 const { replaceOne } = require('../models/file.model');
 const fileRepository = require('../repositories/file.repository');
 
-exports.createFileInfo = async (accountId, filename, filePath, soundName) => {
+exports.createFileInfo = async (accountId, filename, filePath, soundName, soundTag) => {
     try {
-        const query = {accountId: accountId.slice(0, -1), fileName: filename, filePath, soundName, created: Date.now()};
+        const query = {accountId: accountId.slice(0, -1), fileName: filename, filePath, soundName, created: Date.now(), soundTag};
         const result = await fileRepository.create(query);
         return result;
     } catch (e) {

@@ -18,6 +18,9 @@ const fileSchema = new mongoose.Schema(
         },
         soundName: {
             type: String
+        },
+        soundTag: {
+            type: Array
         }
     },{versionKey: false}
 );
