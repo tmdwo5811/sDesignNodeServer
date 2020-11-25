@@ -19,8 +19,11 @@ const fileSchema = new mongoose.Schema(
         soundName: {
             type: String
         },
-        soundTag: {
+        tags: {
             type: Array
+        },
+        category: {
+            type: String
         }
     },{versionKey: false}
 );

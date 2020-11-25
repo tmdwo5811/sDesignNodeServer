@@ -5,10 +5,10 @@ const fileService = require('../services/file.service');
 exports.uploadFile = async (req, res, next) => {
     try {
         const { accountId } = req;
-        const { soundName, soundTag } = req.body;
+        const { soundName, tags, category } = req.body;
         if (!req.file) return res.send('파일을 업로드 해주세요.');
         const filePath = `http://limeprj.xyz:2500/api/get/file/${req.file.filename}`;
-        const uploadStatus = await fileService.createFileInfo(accountId, req.file.filename, filePath, soundName, soundTag);
+        const uploadStatus = await fileService.createFileInfo(accountId, req.file.filename, filePath, soundName, tags, category);
 
         return res.send({
             result: '파일이 업로드 되었습니다.',

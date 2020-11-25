@@ -134,6 +134,21 @@
               "in": "formData",
               "type": "string",
               "required":true
+            },
+            {
+              "name": "category",
+              "in": "formData",
+              "type": "string"
+            },
+            {
+              "name": "tags",
+              "in": "formData",
+              "type": "array",
+              "items":{
+                "type": "string"
+              },
+              "collectionFormat":"multi",
+              "required": true
             }
           ],
           "responses": {
