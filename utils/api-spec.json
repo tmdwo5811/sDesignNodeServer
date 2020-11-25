@@ -111,7 +111,7 @@
       "/api/upload/file": {
         "post": {
           "tags": [
-            "Upload"
+            "Sound"
           ],
           "description": "파일 업로드시 사용되는 api 입니다.",
           "consumes":"multipart/form-data",
@@ -194,6 +194,112 @@
             },
             "500": {
               "description": "[에러]서버에 문제가 있어 회원 가입에 실패하였습니다.",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            }
+          }
+        }
+      },
+      "/api/get/soundList": {
+        "get": {
+          "tags": [
+            "Sound"
+          ],
+          "description": "업로드된 Sound 전체 목록 조회, 페이징 적용 Ver",
+          "parameters": [
+            {
+              "name": "next",
+              "in": "query",
+              "description": "next code",
+              "type": "string"
+            },
+            {
+              "name": "previous",
+              "in": "query",
+              "description": "previous code",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "result",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            }
+          }
+        }
+      },
+      "/api/get/my/soundList": {
+        "get": {
+          "tags": [
+            "Sound"
+          ],
+          "description": "내가 업로드한 Sound 목록 조회, 페이징 적용 Ver",
+          "parameters": [
+            {
+              "name": "token",
+              "in": "header",
+              "description": "jwt Token",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "next",
+              "in": "query",
+              "description": "next code",
+              "type": "string"
+            },
+            {
+              "name": "previous",
+              "in": "query",
+              "description": "previous code",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "result",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            }
+          }
+        }
+      },
+      "/api/remove/my/sound": {
+        "post": {
+          "tags": [
+            "Sound"
+          ],
+          "description": "내 Sound 삭제 하기 api",
+          "parameters": [
+            {
+              "name": "token",
+              "in": "header",
+              "description":"jwt Token",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "data",
+              "in": "body",
+              "type": "object",
+              "required":true,
+              "properties":{
+                "soundId":{
+                  "type":"string"
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "[완료] 업로드가 성공 되었습니다.",
               "content": {
                 "application/json": {},
                 "application/xml": {}

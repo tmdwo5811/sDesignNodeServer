@@ -51,3 +51,27 @@ exports.getSoundList = async (req, res, next) => {
         next(e);
     }
 }
+
+exports.getMySoundList = async (req, res, next) => {
+    try {
+        const { accountId } = req;
+        const { next, previous } = req.query;
+        const result = await fileService.getMySoundList(accountId.slice(0, -1), next, previous);
+        return res.send(result);
+    } catch (e) {
+        console.log(e);
+        next(e);
+    }
+}
+
+exports.removeMySound = async (req, res, next) => {
+    try {
+        const { accountId } = req;
+        const { soundId } = req.body;
+        const result = await fileService.removeMySound(accountId.slice(0, -1), soundId);
+        return res.send(result);
+    } catch (e) {
+        console.log(e);
+        next(e);
+    }
+}

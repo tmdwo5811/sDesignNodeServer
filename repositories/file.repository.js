@@ -26,3 +26,15 @@ exports.paginate = async (query, options, next, previous) => {
         throw e;
     }
 }
+
+exports.findAll = async (query, projection, populate, options) => {
+    return fileModel.find(query, projection).populate(populate).sort(options.sort);
+}
+
+exports.findOne = async (query, projection) => {
+    return fileModel.findOne(query, projection);
+}
+
+exports.removeOne = async (query) => {
+    return fileModel.deleteOne(query);
+}
