@@ -46,7 +46,7 @@ module.exports = (router) => {
         fileController.removeMySound
     )
     router.route("/search/sound")
-    .post(
+    .get(
         fileController.searchSound
     )
 

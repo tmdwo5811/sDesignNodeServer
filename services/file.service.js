@@ -91,10 +91,22 @@ exports.removeMySound = async ( accountId, soundId) => {
     }
 }
 
-exports.searchSound = async (keyword, next) => {
+exports.searchSound = async (keyword, next, previous) => {
     try {
-        const query = {};
-        const paginated = await fileRepository.paginate(query);
+        const query = {$text: {$search: keyword}};
+        const paginated = await fileRepository.paginate(query, {limit: 15}, next, previous);
+        const ids = paginated.results.map(s => s._id);
+        const populate = {path: 'accountId', model: 'account', select: '-password'};
+        const result = await fileRepository.findAll({_id: {$in: ids}}, {}, populate,{sort: {_id: -1}});
+        return {
+            result,
+            paginator: {
+                previous: paginated.previous,
+                hasPrevious: paginated.hasPrevious,
+                next: paginated.next,
+                hasNext: paginated.hasNext
+            }
+        };
     } catch (e) {
         console.log(e);
         throw e;

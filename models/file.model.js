@@ -31,6 +31,7 @@ const fileSchema = new mongoose.Schema(
 
 
 fileSchema.index({accountId: 1});
+fileSchema.index({soundName: "text", tags: "text", category:"text"});
 fileSchema.plugin(MongoPaging.mongoosePlugin);
 
 mongoose.set('useCreateIndex', true);
