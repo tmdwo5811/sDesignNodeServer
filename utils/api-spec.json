@@ -308,6 +308,44 @@
           }
         }
       },
+      "/api/search/sound": {
+        "get": {
+          "tags": [
+            "Sound"
+          ],
+          "description": "사운드 검색 api",
+          "parameters": [
+            {
+              "name": "keyword",
+              "in": "query",
+              "description": "검색어",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "next",
+              "in": "query",
+              "description": "다음 페이지 해쉬 코드",
+              "type": "string"
+            },
+            {
+              "name": "previous",
+              "in": "query",
+              "description": "이전 페이지 해쉬 코드",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "[검색 성공]",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            }
+          }
+        }
+      },
       "/api/confirm/account": {
         "get": {
           "tags": [
