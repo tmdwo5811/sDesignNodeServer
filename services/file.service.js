@@ -91,3 +91,12 @@ exports.removeMySound = async ( accountId, soundId) => {
     }
 }
 
+exports.searchSound = async (keyword, next) => {
+    try {
+        const query = {};
+        const paginated = await fileRepository.paginate(query);
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+}

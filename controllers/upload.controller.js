@@ -75,3 +75,14 @@ exports.removeMySound = async (req, res, next) => {
         next(e);
     }
 }
+
+exports.searchSound = async (req, res, next) => {
+    try {
+        const {keyword, next} = req.query;
+        const result = await fileService.searchSound(keyword, next);
+        return res.send(result); =
+    } catch (e) {
+        console.log(e);
+        next(e);
+    }
+}

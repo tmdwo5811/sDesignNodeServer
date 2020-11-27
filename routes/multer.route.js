@@ -45,6 +45,10 @@ module.exports = (router) => {
         tokenController.verifyToken,
         fileController.removeMySound
     )
+    router.route("/search/sound")
+    .post(
+        fileController.searchSound
+    )
 
     return router;
 }
