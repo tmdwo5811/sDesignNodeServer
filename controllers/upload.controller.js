@@ -67,7 +67,7 @@ exports.getMySoundList = async (req, res, next) => {
   try {
     const { accountId } = req;
     const { next, previous } = req.query;
-    const result = await fileService.getMySoundList(accountId.slice(0, -1), next, previous);
+    const result = await fileService.getMySoundList(accountId, next, previous);
     return res.send(result);
   } catch (e) {
     console.log(e);
@@ -79,7 +79,7 @@ exports.removeMySound = async (req, res, next) => {
   try {
     const { accountId } = req;
     const { soundId } = req.body;
-    const result = await fileService.removeMySound(accountId.slice(0, -1), soundId);
+    const result = await fileService.removeMySound(accountId, soundId);
     return res.send(result);
   } catch (e) {
     console.log(e);

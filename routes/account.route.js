@@ -16,8 +16,11 @@ const storage = multer.diskStorage({
     callback(null, file.fieldname + "_" + rand);
   },
 });
-
-const upload = multer({ storage });
+// 업로드 용량 제한 10MB
+const upload = multer({
+  storage,
+  limits: { fileSize: 10000000 },
+});
 
 module.exports = (router) => {
   router

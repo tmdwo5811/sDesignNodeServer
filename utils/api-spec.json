@@ -162,6 +162,43 @@
           }
         }
       },
+      "/api/update/profile": {
+        "put": {
+          "tags": [
+            "Account"
+          ],
+          "description": "프로필 수정 api 프로필 이미지, 닉네임 수정 기능",
+          "consumes":"multipart/form-data",
+          "parameters": [
+            {
+              "name": "token",
+              "in": "header",
+              "description":"jwt Token",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "userImg",
+              "in": "formData",
+              "type": "file"
+            },
+            {
+              "name": "accountName",
+              "in": "formData",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "[완료] 업로드가 성공 되었습니다.",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            }
+          }
+        }
+      },
       "/api/token/test": {
         "get": {
           "tags": [

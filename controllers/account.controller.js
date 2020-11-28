@@ -74,13 +74,13 @@ exports.accountLogin = async (req, res, next) => {
 
 exports.updateProfile = async (req, res, next) => {
   try {
-    const { accountId, accountName } = req.body;
+    const { accountId } = req;
+    const { accountName } = req.body;
     let filePath = null;
-
+    if (!accountName && !req.file) return res.send("7777");
     if (req.file) {
       filePath = `http://limeprj.xyz:2500/api/get/img/${req.file.filename}`;
     }
-
     const filter = { _id: accountId };
     const doc = { accountName, accountImg: filePath };
     const result = await accountRepository.updateOne(filter, doc, { new: true });
