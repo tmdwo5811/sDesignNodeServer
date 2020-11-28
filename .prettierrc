@@ -1,0 +1,12 @@
+{
+    "printWidth": 150,
+    "trailingComma": "es5",
+    "overrides": [
+        {
+            "files": "*.routes.js",
+            "options": {
+                "printWidth": 50
+            }
+        }
+    ]
+}
