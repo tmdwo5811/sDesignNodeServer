@@ -20,6 +20,7 @@ const mongoOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
+// https 적용 해야함
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", () => {
   console.log("Connected to sDesign mongod Server.");
