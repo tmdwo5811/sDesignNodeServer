@@ -3,7 +3,7 @@
     "trailingComma": "es5",
     "overrides": [
         {
-            "files": "*.routes.js",
+            "files": "*.route.js",
             "options": {
                 "printWidth": 50
             }
