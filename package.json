@@ -4,7 +4,7 @@
   "description": "sDesign 노드 api 서버",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "crypto": "^1.0.1",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "jest": "^26.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongo-cursor-pagination": "^7.3.1",
     "mongoose": "^5.10.9",
