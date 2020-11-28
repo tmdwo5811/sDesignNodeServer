@@ -54,9 +54,9 @@ exports.accountLogin = async (req, res, next) => {
       { accountEmail, isAcceptEmail: true },
       { created: false, updated: false, isAcceptEmail: false },
       { lean: true }
-    );=
+    );
     const canLogin = await accountService.verifyPwhash(accountPw, userInfo.accountPw);
-    
+
     if (!canLogin) return res.send("5504");
     const token = await tokenController.newToken(userInfo);
     const result = {
