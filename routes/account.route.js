@@ -1,7 +1,24 @@
 "use strict";
-
+const multer = require("multer");
+const path = require("path");
 const accountController = require("../controllers/account.controller");
 const tokenController = require("../controllers/token.controller");
+
+let rand;
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "./files/profile");
+  },
+  filename: (req, file, callback) => {
+    rand =
+      Date.now() +
+      path.extname(file.originalname);
+    callback(null, file.fieldname + "_" + rand);
+  },
+});
+
+const upload = multer({ storage });
+
 module.exports = (router) => {
   router
     .route("/create/account")
@@ -16,10 +33,19 @@ module.exports = (router) => {
     .post(accountController.accountLogin);
 
   router
+    .route("/update/profile")
+    .put(
+      tokenController.verifyToken,
+      upload.single("userImg"),
+      accountController.updateProfile
+    );
+
+  router
     .route("/token/test")
     .get(
       tokenController.verifyToken,
       accountController.tokenTest
     );
+
   return router;
 };
