@@ -1,5 +1,6 @@
 "use strict";
 const accountService = require("../services/account.service");
+const fileService = require("../services/file.service");
 const accountRepository = require("../repositories/account.repository");
 const nodeMailer = require("nodemailer");
 const tokenController = require("./token.controller");
@@ -53,10 +54,9 @@ exports.accountLogin = async (req, res, next) => {
       { accountEmail, isAcceptEmail: true },
       { created: false, updated: false, isAcceptEmail: false },
       { lean: true }
-    );
-    console.log(userInfo);
+    );=
     const canLogin = await accountService.verifyPwhash(accountPw, userInfo.accountPw);
-    console.log(canLogin);
+    
     if (!canLogin) return res.send("5504");
     const token = await tokenController.newToken(userInfo);
     const result = {
@@ -79,10 +79,17 @@ exports.updateProfile = async (req, res, next) => {
     let filePath = null;
     if (!accountName && !req.file) return res.send("7777");
     if (req.file) {
-      filePath = `http://limeprj.xyz:2500/api/get/img/${req.file.filename}`;
+      filePath = req.file.filename == undefined ? false : `http://limeprj.xyz:2500/api/get/img/${req.file.filename}`;
+      if (filePath) {
+        await fileService.removeProfileImg(accountId);
+        const thumbnailName = await fileService.resizeImg(req.file.filename);
+        filePath = "http://limeprj.xyz:2500/api/get/img/" + thumbnailName;
+      }
     }
     const filter = { _id: accountId };
-    const doc = { accountName, accountImg: filePath };
+    let doc = { accountName, accountImg: filePath };
+    if (accountName && !filePath) doc = { accountName };
+    if (!accountName && filePath) doc = { accountImg: filePath };
     const result = await accountRepository.updateOne(filter, doc, { new: true });
 
     return res.send(result);

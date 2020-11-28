@@ -1,8 +1,10 @@
 "use struct";
 const fs = require("fs");
 const path = require("path");
-
+const sharp = require("sharp");
+const multer = require("multer");
 const fileRepository = require("../repositories/file.repository");
+const accountRepository = require("../repositories/account.repository");
 const removeEmpty = (resultData) => {
   let result = [];
   for (let i = 0; i < resultData.length; i++) {
@@ -100,6 +102,46 @@ exports.removeMySound = async (accountId, soundId) => {
       result,
       isRemoved,
     };
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+exports.resizeImg = async (fileName) => {
+  try {
+    const localPath = path.join(__dirname, "js200", "../../files/profile/" + fileName);
+    const destination = path.join(__dirname, "js200", "../../files/profile/thumbnail_" + fileName);
+    const result = await sharp(localPath).resize(35, 35).jpeg({ quality: 50 }).toFile(destination);
+    fs.unlinkSync(localPath);
+    if (result) return "thumbnail_" + fileName;
+    return result.err;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+exports.removeProfileImg = async (accountId) => {
+  try {
+    const accountInfo = await accountRepository.findOne({ _id: accountId });
+    if (!accountInfo.accountImg) return null;
+    const imgName = accountInfo.accountImg.split("/");
+    const imgPath = path.join(__dirname, "js200", "../../files/profile/" + imgName[imgName.length - 1]);
+
+    let isRemoved = false;
+    fs.access(imgPath, fs.constants.F_OK, (err) => {
+      if (err) return { isRemoved };
+
+      fs.unlink(imgPath, (err) => {
+        if (err) {
+          return err;
+        } else {
+          isRemoved = true;
+        }
+      });
+    });
+    return isRemoved;
   } catch (e) {
     console.log(e);
     throw e;

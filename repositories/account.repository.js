@@ -22,7 +22,7 @@ exports.updateOne = async (filter, doc, options) => {
   }
 };
 
-exports.findOne = async (query, projection, options) => {
+exports.findOne = async (query, projection = {}, options = { lean: true }) => {
   try {
     const result = await accountModel.findOne(query, projection).lean(options.lean);
     return result;
