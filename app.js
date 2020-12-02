@@ -5,9 +5,26 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const http = require("http");
+const https = require("https");
+const fs = require("fs");
+const path = require("path");
 const app = express();
 const db = mongoose.connection;
 
+try {
+  const option = {
+    ca: fs.readFileSync("/etc/letsencrypt/live/limeprj.xyz/fullchain.pem"),
+    key: fs.readFileSync(path.resolve(process.cwd(), "/etc/letsencrypt/live/limeprj.xyz/privkey.pem"), "utf8").toString(),
+    cert: fs.readFileSync(path.resolve(process.cwd(), "/etc/letsencrypt/live/limeprj.xyz/cert.pem"), "utf8").toString(),
+  };
+
+  HTTPS.createServer(option, app).listen(sslport, () => {
+    colorConsole.success(`[HTTPS] Soda Server is started on port ${colors.cyan(sslport)}`);
+  });
+} catch (e) {
+  colorConsole.error("[HTTPS] HTTPS 오류가 발생. HTTPS 서버 실행 X");
+  colorConsole.warn(error);
+}
 app.use(cors());
 app.use(bodyParser.json());
 app.set("views", __dirname + "/utils");
