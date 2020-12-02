@@ -18,11 +18,11 @@ try {
     cert: fs.readFileSync(path.resolve(process.cwd(), "/etc/letsencrypt/live/limeprj.xyz/cert.pem"), "utf8").toString(),
   };
 
-  https.createServer(option, app).listen(443, () => {
+  https.createServer(option, app).listen(2501, () => {
     console.log(`[HTTPS] Soda Server is started on port`);
   });
 } catch (e) {
-  console.log("[HTTPS] HTTPS 오류가 발생. HTTPS 서버 실행 X");
+  console.log("[HTTPS] HTTPS 오류 발생. HTTPS 서버 실행 X");
   console.log(e);
 }
 app.use(cors());
