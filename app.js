@@ -8,12 +8,6 @@ const http = require("http");
 const app = express();
 const db = mongoose.connection;
 
-require("greenlock-express").init({
-  packageRoot: __dirname,
-  configDir: "./greenlock.d",
-  maintainerEmail: "sdesignsmtp@gmail.com",
-});
-
 app.use(cors());
 app.use(bodyParser.json());
 app.set("views", __dirname + "/utils");
