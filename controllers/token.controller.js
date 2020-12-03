@@ -17,7 +17,7 @@ exports.newToken = async (user) => {
 exports.verifyToken = async (req, res, next) => {
   try {
     const token = req.headers.token;
-    console.log(token);
+    console.log("userToken ==>", token);
     const result = await jwt.verify(token, SECRET_KEY);
     if (!result) return false;
     req.accountEmail = result.accountEmail;
