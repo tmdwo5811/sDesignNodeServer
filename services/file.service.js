@@ -4,6 +4,7 @@ const path = require("path");
 const sharp = require("sharp");
 const multer = require("multer");
 const fileRepository = require("../repositories/file.repository");
+const ObjectId = require("mongoose").Types.ObjectId;
 const accountRepository = require("../repositories/account.repository");
 const removeEmpty = (resultData) => {
   let result = [];
@@ -57,7 +58,7 @@ exports.getSoundList = async (next, previous) => {
 
 exports.getMySoundList = async (accountId, next, previous) => {
   try {
-    const query = { accountId };
+    const query = { accountId: ObjectId(accountId) };
     const paginated = await fileRepository.paginate(query, { limit: 15 }, next, previous);
     const ids = paginated.results.map((s) => s._id);
     const populate = { path: "accountId", model: "account", select: "accountName accountEmail accountImg" };

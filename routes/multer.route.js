@@ -43,7 +43,7 @@ module.exports = (router) => {
     .route("/get/my/soundList")
     .get(
       tokenController.verifyToken,
-      fileController.getSoundList
+      fileController.getMySoundList
     );
   router
     .route("/remove/my/sound")

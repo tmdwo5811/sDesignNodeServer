@@ -66,6 +66,7 @@ exports.getSoundList = async (req, res, next) => {
 exports.getMySoundList = async (req, res, next) => {
   try {
     const { accountId } = req;
+    console.log(accountId);
     const { next, previous } = req.query;
     const result = await fileService.getMySoundList(accountId, next, previous);
     return res.send(result);
