@@ -19,7 +19,7 @@ try {
   };
 
   https.createServer(option, app).listen(2501, () => {
-    console.log(`[HTTPS] Soda Server is started on port`);
+    console.log(`[HTTPS] sDesign Server is started on port`);
   });
 } catch (e) {
   console.log("[HTTPS] HTTPS 오류 발생. HTTPS 서버 실행 X");

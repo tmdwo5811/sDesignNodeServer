@@ -26,6 +26,8 @@ const likeSchema = new mongoose.Schema(
 
 likeSchema.index({ targetSoundId: 1 });
 likeSchema.index({ accountId: 1 });
+likeSchema.index({ updated: -1 });
+likeSchema.index({ created: -1 });
 likeSchema.plugin(MongoPaging.mongoosePlugin);
 
 mongoose.set("useCreateIndex", true);
