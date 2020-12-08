@@ -26,6 +26,7 @@
     "crypto": "^1.0.1",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "gitmoji-cli": "^3.2.13",
     "jest": "^26.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongo-cursor-pagination": "^7.3.1",
