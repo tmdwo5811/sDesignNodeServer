@@ -19,6 +19,8 @@ exports.paginate = async (query, options, next, previous) => {
       next,
       previous,
       limit: options.limit,
+      paginatedField: options.sort || "_id",
+      sortAscending: options.sortAscending || true,
     });
     return result;
   } catch (e) {
@@ -37,4 +39,8 @@ exports.findOne = async (query, projection) => {
 
 exports.removeOne = async (query) => {
   return likeModel.deleteOne(query);
+};
+
+exports.upsetOne = async (filter, doc) => {
+  return likeModel.updateOne(filter, doc, { upsert: true, new: true });
 };
