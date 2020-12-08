@@ -36,7 +36,7 @@ exports.getSoundList = async (next, previous) => {
   try {
     const query = {};
     const totalCount = await fileRepository.countDocuments({});
-    const paginated = await fileRepository.paginate(query, { limit: 15 }, next, previous);
+    const paginated = await fileRepository.paginate(query, { limit: 5 }, next, previous);
     const ids = paginated.results.map((s) => s._id);
     const populate = { path: "accountId", model: "account", select: "accountName accountEmail accountImg" };
     const options = { sort: { _id: -1 } };
@@ -62,7 +62,7 @@ exports.getMySoundList = async (accountId, next, previous) => {
   try {
     const query = { accountId: ObjectId(accountId) };
     const totalCount = await fileRepository.countDocuments({ accountId });
-    const paginated = await fileRepository.paginate(query, { limit: 15 }, next, previous);
+    const paginated = await fileRepository.paginate(query, { limit: 5 }, next, previous);
     const ids = paginated.results.map((s) => s._id);
     const populate = { path: "accountId", model: "account", select: "accountName accountEmail accountImg" };
     const options = { sort: { _id: -1 } };
@@ -157,7 +157,7 @@ exports.searchSound = async (keyword, next, previous) => {
   try {
     const query = { $text: { $search: keyword } };
     const totalCount = await fileRepository.countDocuments(query);
-    const paginated = await fileRepository.paginate(query, { limit: 15 }, next, previous);
+    const paginated = await fileRepository.paginate(query, { limit: 5 }, next, previous);
     const ids = paginated.results.map((s) => s._id);
     const populate = { path: "accountId", model: "account", select: "-password" };
     const resultData = await fileRepository.findAll({ _id: { $in: ids } }, {}, populate, { sort: { _id: -1 } });
