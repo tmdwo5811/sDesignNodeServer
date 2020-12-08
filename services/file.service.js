@@ -35,6 +35,7 @@ exports.createFileInfo = async (accountId, filename, filePath, soundName, tags, 
 exports.getSoundList = async (next, previous) => {
   try {
     const query = {};
+    const totalCount = await fileRepository.countDocuments({});
     const paginated = await fileRepository.paginate(query, { limit: 15 }, next, previous);
     const ids = paginated.results.map((s) => s._id);
     const populate = { path: "accountId", model: "account", select: "accountName accountEmail accountImg" };
@@ -42,6 +43,7 @@ exports.getSoundList = async (next, previous) => {
     const resultData = await fileRepository.findAll({ _id: ids }, {}, populate, options);
     const result = removeEmpty(resultData);
     return {
+      totalCount,
       result,
       paginator: {
         previous: paginated.previous,
@@ -59,6 +61,7 @@ exports.getSoundList = async (next, previous) => {
 exports.getMySoundList = async (accountId, next, previous) => {
   try {
     const query = { accountId: ObjectId(accountId) };
+    const totalCount = await fileRepository.countDocuments({ accountId });
     const paginated = await fileRepository.paginate(query, { limit: 15 }, next, previous);
     const ids = paginated.results.map((s) => s._id);
     const populate = { path: "accountId", model: "account", select: "accountName accountEmail accountImg" };
@@ -66,6 +69,7 @@ exports.getMySoundList = async (accountId, next, previous) => {
     const resultData = await fileRepository.findAll({ _id: ids }, {}, populate, options);
     const result = removeEmpty(resultData);
     return {
+      totalCount,
       result,
       paginator: {
         previous: paginated.previous,
@@ -152,12 +156,14 @@ exports.removeProfileImg = async (accountId) => {
 exports.searchSound = async (keyword, next, previous) => {
   try {
     const query = { $text: { $search: keyword } };
+    const totalCount = await fileRepository.countDocuments(query);
     const paginated = await fileRepository.paginate(query, { limit: 15 }, next, previous);
     const ids = paginated.results.map((s) => s._id);
     const populate = { path: "accountId", model: "account", select: "-password" };
     const resultData = await fileRepository.findAll({ _id: { $in: ids } }, {}, populate, { sort: { _id: -1 } });
     const result = removeEmpty(resultData);
     return {
+      totalCount,
       result,
       paginator: {
         previous: paginated.previous,

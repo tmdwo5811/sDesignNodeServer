@@ -39,3 +39,7 @@ exports.findOne = async (query, projection) => {
 exports.removeOne = async (query) => {
   return fileModel.deleteOne(query);
 };
+
+exports.countDocuments = async (query) => {
+  return fileModel.countDocuments(query);
+};
