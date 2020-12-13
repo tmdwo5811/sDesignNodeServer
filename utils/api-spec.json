@@ -163,7 +163,7 @@
         }
       },
       "/api/update/profile": {
-        "put": {
+        "post": {
           "tags": [
             "Account"
           ],

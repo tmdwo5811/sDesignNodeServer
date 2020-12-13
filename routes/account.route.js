@@ -37,7 +37,7 @@ module.exports = (router) => {
 
   router
     .route("/update/profile")
-    .put(
+    .post(
       tokenController.verifyToken,
       upload.single("userImg"),
       accountController.updateProfile
