@@ -44,6 +44,13 @@ module.exports = (router) => {
     );
 
   router
+    .route("/get/profile/info")
+    .get(
+      tokenController.verifyToken,
+      accountController.getProfileInfo
+    );
+
+  router
     .route("/token/test")
     .get(
       tokenController.verifyToken,

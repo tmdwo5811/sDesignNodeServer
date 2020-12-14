@@ -239,6 +239,46 @@
           }
         }
       },
+      "/api/get/profile/info": {
+        "get": {
+          "tags": [
+            "Account"
+          ],
+          "description": "토큰 기반 프로필 데이터 조회",
+          "parameters": [
+            {
+              "name": "token",
+              "in": "header",
+              "description": "jwt Token",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "[완료]가입이 정상적으로 완료되었습니다.",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            },
+            "409": {
+              "description": "[에러]사용자 아이디가 이미 존재하여 회원 가입이 실패하였습니다.",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            },
+            "500": {
+              "description": "[에러]서버에 문제가 있어 회원 가입에 실패하였습니다.",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            }
+          }
+        }
+      },
       "/api/get/soundList": {
         "get": {
           "tags": [

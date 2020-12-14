@@ -99,6 +99,20 @@ exports.updateProfile = async (req, res, next) => {
   }
 };
 
+exports.getProfileInfo = async (req, res, next) => {
+  try {
+    const { accountId } = req;
+    const result = await accountRepository.findOne(
+      { _id: accountId },
+      { accountPw: false, isAcceptEmail: false, isExit: false, created: false, updated: false }
+    );
+    return res.send(result);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
 exports.tokenTest = async (req, res, next) => {
   try {
     const { accountEmail, accountId, accountName } = req;
