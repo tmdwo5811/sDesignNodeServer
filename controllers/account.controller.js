@@ -79,11 +79,11 @@ exports.updateProfile = async (req, res, next) => {
     let filePath = null;
     if (!accountName && !req.file) return res.send("7777");
     if (req.file) {
-      filePath = req.file.filename == undefined ? false : `http://limeprj.xyz:2500/api/get/img/${req.file.filename}`;
+      filePath = req.file.filename == undefined ? false : `https://limeprj.xyz:2500/api/get/img/${req.file.filename}`;
       if (filePath) {
         await fileService.removeProfileImg(accountId);
         const thumbnailName = await fileService.resizeImg(req.file.filename);
-        filePath = "http://limeprj.xyz:2500/api/get/img/" + thumbnailName;
+        filePath = "https://limeprj.xyz:2500/api/get/img/" + thumbnailName;
       }
     }
     const filter = { _id: accountId };
