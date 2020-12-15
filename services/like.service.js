@@ -1,5 +1,6 @@
 const likeRepository = require("../repositories/like.repository");
 const fileRepository = require("../repositories/file.repository");
+const ObjectId = require("mongoose").Types.ObjectId;
 exports.setLike = async (accountId, soundId) => {
   try {
     const likeInfo = await likeRepository.findOne({ accountId, soundId }, { isDeleted: true });
@@ -21,12 +22,12 @@ exports.setLike = async (accountId, soundId) => {
 
 exports.getMyLikedSounds = async (accountId, next, previous) => {
   try {
-    const query = { accountId, isDeleted: false };
+    const query = { accountId: ObjectId(accountId), isDeleted: false };
     const options = { sort: "updated", sortAscending: true, limit: 15 };
     const paginated = await likeRepository.paginate(query, options, next, previous);
     const ids = paginated.results.map((s) => s._id);
     const populate = { path: "soundId", model: "file", select: "" };
-    const result = await fileRepository.findAll({ _id: { $in: ids } }, {}, populate, { sort: { updated: -1 } });
+    const result = await likeRepository.findAll({ _id: { $in: ids } }, { isDeleted: false }, populate, { sort: { updated: -1 } });
     return {
       result,
       paginator: {

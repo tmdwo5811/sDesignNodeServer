@@ -41,6 +41,6 @@ exports.removeOne = async (query) => {
   return likeModel.deleteOne(query);
 };
 
-exports.upsetOne = async (filter, doc) => {
+exports.upsertOne = async (filter, doc) => {
   return likeModel.updateOne(filter, doc, { upsert: true, new: true });
 };

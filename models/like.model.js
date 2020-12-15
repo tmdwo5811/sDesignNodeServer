@@ -7,7 +7,7 @@ const likeSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "account",
     },
-    targetSoundId: {
+    soundId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "file",
     },

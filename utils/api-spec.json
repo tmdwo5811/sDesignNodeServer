@@ -423,6 +423,44 @@
           }
         }
       },
+      "/api/get/my/like/sounds": {
+        "get": {
+          "tags": [
+            "Sound"
+          ],
+          "description": "좋아요한 사운드 리스트 조회 api",
+          "parameters": [
+            {
+              "name": "token",
+              "in": "header",
+              "description":"jwt Token",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "next",
+              "in": "query",
+              "description": "다음 페이지 해쉬 코드",
+              "type": "string"
+            },
+            {
+              "name": "previous",
+              "in": "query",
+              "description": "이전 페이지 해쉬 코드",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "[검색 성공]",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            }
+          }
+        }
+      },
       "/api/confirm/account": {
         "get": {
           "tags": [
@@ -448,6 +486,43 @@
           "responses": {
             "200": {
               "description": "[완료] 이메일 인증이 완료되었습니다",
+              "content": {
+                "application/json": {},
+                "application/xml": {}
+              }
+            }
+          }
+        }
+      },
+      "/api/set/like": {
+        "post": {
+          "tags": [
+            "Like"
+          ],
+          "description": "Sound 좋아요 설정/해제 api",
+          "parameters": [
+            {
+              "name": "token",
+              "in": "header",
+              "description":"jwt Token",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "data",
+              "in": "body",
+              "type": "object",
+              "required":true,
+              "properties":{
+                "soundId":{
+                  "type":"string"
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "[완료] 업로드가 성공 되었습니다.",
               "content": {
                 "application/json": {},
                 "application/xml": {}
