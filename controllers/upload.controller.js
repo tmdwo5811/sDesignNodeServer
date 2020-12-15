@@ -45,6 +45,7 @@ exports.getImgFile = async (req, res, next) => {
   try {
     const { fileName } = req.params;
     const filePath = path.resolve(__dirname, "../files/profile/" + fileName);
+    console.log(filePath);
     return res.sendFile(filePath);
   } catch (e) {
     console.log(e);
