@@ -117,7 +117,7 @@ exports.resizeImg = async (fileName) => {
   try {
     const localPath = path.join(__dirname, "js200", "../../files/profile/" + fileName);
     const destination = path.join(__dirname, "js200", "../../files/profile/thumbnail_" + fileName);
-    const result = await sharp(localPath).resize(100, 100).jpeg({ quality: 50 }).toFile(destination);
+    const result = await sharp(localPath).resize(250, 250).jpeg({ quality: 100 }).toFile(destination);
     fs.unlinkSync(localPath);
     if (result) return "thumbnail_" + fileName;
     return result.err;
