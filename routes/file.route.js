@@ -38,7 +38,10 @@ module.exports = (router) => {
     .get(fileController.getImgFile);
   router
     .route("/get/soundList")
-    .get(fileController.getSoundList);
+    .get(
+      tokenController.verifyTokenV2,
+      fileController.getSoundList
+    );
   router
     .route("/get/my/soundList")
     .get(
@@ -53,7 +56,10 @@ module.exports = (router) => {
     );
   router
     .route("/search/sound")
-    .get(fileController.searchSound);
+    .get(
+      tokenController.verifyTokenV2,
+      fileController.searchSound
+    );
 
   return router;
 };

@@ -29,7 +29,7 @@ exports.paginate = async (query, options, next, previous) => {
 };
 
 exports.findAll = async (query, projection, populate, options) => {
-  return fileModel.find(query, projection).populate(populate).sort(options.sort);
+  return fileModel.find(query, projection).populate(populate).sort(options.sort).limit(options.limit);
 };
 
 exports.findOne = async (query, projection) => {

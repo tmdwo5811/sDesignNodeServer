@@ -1,6 +1,6 @@
 const likeRepository = require("../repositories/like.repository");
-const fileRepository = require("../repositories/file.repository");
 const ObjectId = require("mongoose").Types.ObjectId;
+
 exports.setLike = async (accountId, soundId) => {
   try {
     const likeInfo = await likeRepository.findOne({ accountId, soundId }, { isDeleted: true });
@@ -41,4 +41,18 @@ exports.getMyLikedSounds = async (accountId, next, previous) => {
     console.log(e);
     throw e;
   }
+};
+
+exports.checkLikedSounds = async (soundList, accountId) => {
+  const soundListIds = soundList.map((s) => s._id);
+  const likeDatas = await likeRepository.findAllV2(
+    { accountId: ObjectId(accountId), soundId: soundListIds, isDeleted: false },
+    { soundId: true, _id: false }
+  );
+  const likeSoundIds = likeDatas.map((s) => s.soundId.toString());
+  const result = soundList.map((s) => {
+    s.isLiked = likeSoundIds.includes(s._id.toString());
+    return s;
+  });
+  return result;
 };

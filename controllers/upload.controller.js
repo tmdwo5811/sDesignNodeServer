@@ -55,8 +55,9 @@ exports.getImgFile = async (req, res, next) => {
 
 exports.getSoundList = async (req, res, next) => {
   try {
+    const { accountId } = req;
     const { next, previous } = req.query;
-    const result = await fileService.getSoundList(next, previous);
+    const result = await fileService.getSoundList(next, previous, accountId);
     return res.send(result);
   } catch (e) {
     console.log(e);
@@ -90,8 +91,9 @@ exports.removeMySound = async (req, res, next) => {
 
 exports.searchSound = async (req, res, next) => {
   try {
+    const { accountId } = req;
     const { keyword, next, previous } = req.query;
-    const result = await fileService.searchSound(keyword, next, previous);
+    const result = await fileService.searchSound(keyword, next, previous, accountId);
     return res.send(result);
   } catch (e) {
     console.log(e);

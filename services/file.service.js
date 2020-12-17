@@ -2,10 +2,10 @@
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
-const multer = require("multer");
 const fileRepository = require("../repositories/file.repository");
 const ObjectId = require("mongoose").Types.ObjectId;
 const accountRepository = require("../repositories/account.repository");
+const likeService = require("../services/like.service");
 const removeEmpty = (resultData) => {
   let result = [];
   for (let i = 0; i < resultData.length; i++) {
@@ -32,19 +32,19 @@ exports.createFileInfo = async (accountId, filename, filePath, soundName, tags, 
   }
 };
 
-exports.getSoundList = async (next, previous) => {
+exports.getSoundList = async (next, previous, accountId) => {
   try {
     const query = {};
     const totalCount = await fileRepository.countDocuments({});
     const paginated = await fileRepository.paginate(query, { limit: 11 }, next, previous);
     const ids = paginated.results.map((s) => s._id);
     const populate = { path: "accountId", model: "account", select: "accountName accountEmail accountImg" };
-    const options = { sort: { _id: -1 } };
+    const options = { sort: { _id: -1 }, limit: ids.length };
     const resultData = await fileRepository.findAll({ _id: ids }, {}, populate, options);
-    const result = removeEmpty(resultData);
+    let result = removeEmpty(resultData);
     return {
       totalCount,
-      result,
+      result: !accountId ? result : await likeService.checkLikedSounds(result, accountId),
       paginator: {
         previous: paginated.previous,
         hasPrevious: paginated.hasPrevious,
@@ -153,7 +153,7 @@ exports.removeProfileImg = async (accountId) => {
   }
 };
 
-exports.searchSound = async (keyword, next, previous) => {
+exports.searchSound = async (keyword, next, previous, accountId) => {
   try {
     const query = { $text: { $search: keyword } };
     const totalCount = await fileRepository.countDocuments(query);
@@ -164,7 +164,7 @@ exports.searchSound = async (keyword, next, previous) => {
     const result = removeEmpty(resultData);
     return {
       totalCount,
-      result,
+      result: !accountId ? result : await likeService.checkLikedSounds(result, accountId),
       paginator: {
         previous: paginated.previous,
         hasPrevious: paginated.hasPrevious,

@@ -29,3 +29,24 @@ exports.verifyToken = async (req, res, next) => {
     throw e;
   }
 };
+
+exports.verifyTokenV2 = async (req, res, next) => {
+  try {
+    if (!req.headers.token || req.headers.token == null || req.headers.token == undefined || req.headers.token == "undefined") {
+      req.accountId = false;
+      req.accountEmail = false;
+      req.accountName = false;
+      return next();
+    }
+    const token = req.headers.token;
+    const result = await jwt.verify(token, SECRET_KEY);
+    if (!result) return false;
+    req.accountEmail = result.accountEmail;
+    req.accountId = result.accountId.slice(0, -1);
+    req.accountName = result.accountName;
+    return next();
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};

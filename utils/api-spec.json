@@ -287,6 +287,12 @@
           "description": "업로드된 Sound 전체 목록 조회, 페이징 적용 Ver",
           "parameters": [
             {
+              "name": "token",
+              "in": "header",
+              "description":"jwt Token 있어도 되고 없어도 되고",
+              "type": "string"
+            },
+            {
               "name": "next",
               "in": "query",
               "description": "next code",
@@ -392,6 +398,12 @@
           ],
           "description": "사운드 검색 api",
           "parameters": [
+            {
+              "name": "token",
+              "in": "header",
+              "description":"jwt Token 있어도 되고 없어도 되고",
+              "type": "string"
+            },
             {
               "name": "keyword",
               "in": "query",

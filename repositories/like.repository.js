@@ -33,6 +33,9 @@ exports.findAll = async (query, projection, populate, options) => {
   return likeModel.find(query, projection).populate(populate).sort(options.sort);
 };
 
+exports.findAllV2 = async (query, projection) => {
+  return likeModel.find(query, projection);
+};
 exports.findOne = async (query, projection) => {
   return likeModel.findOne(query, projection);
 };
