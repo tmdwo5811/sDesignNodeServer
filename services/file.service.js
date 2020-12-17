@@ -70,7 +70,7 @@ exports.getMySoundList = async (accountId, next, previous) => {
     const result = removeEmpty(resultData);
     return {
       totalCount,
-      result,
+      result: await likeService.checkLikedSounds(result, accountId),
       paginator: {
         previous: paginated.previous,
         hasPrevious: paginated.hasPrevious,
