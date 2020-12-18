@@ -61,6 +61,9 @@ exports.getMyLikedSounds = async (accountId, next, previous) => {
 
 exports.getMyLikedSoundsV2 = async (accountId, next, previous) => {
   try {
+    const likeDatas = await likeRepository.findAllV2({ accountId: ObjectId(accountId) }, { soundId: true, _id: false });
+    const likeIds = likeDatas.map((s) => s.soundId);
+    const totalCount = await fileRepository.countDocuments({ _id: { $in: likeIds } });
     const query = { accountId: ObjectId(accountId), isDeleted: false };
     const options = { sort: "updated", sortAscending: true, limit: 15 };
     const paginated = await likeRepository.paginate(query, options, next, previous);
@@ -68,6 +71,7 @@ exports.getMyLikedSoundsV2 = async (accountId, next, previous) => {
     const populate = { path: "accountId", model: "account", select: "accountEmail accountName" };
     let result = await fileRepository.findAll({ _id: { $in: ids } }, {}, populate, { sort: { created: -1 }, limit: ids.length });
     return {
+      totalCount,
       result: !accountId ? result : await checkLikedSoundsV2(result, accountId),
       paginator: {
         previous: paginated.previous,
