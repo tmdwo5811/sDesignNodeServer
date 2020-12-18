@@ -28,6 +28,9 @@ const fileSchema = new mongoose.Schema(
     likeCount: {
       type: Number,
     },
+    isLiked: {
+      type: Boolean,
+    },
   },
   { versionKey: false }
 );

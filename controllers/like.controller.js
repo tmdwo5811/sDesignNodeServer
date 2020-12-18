@@ -16,7 +16,7 @@ exports.getMyLikedSounds = async (req, res, next) => {
   try {
     const { accountId } = req;
     const { next, previous } = req.query;
-    const result = await likeService.getMyLikedSounds(accountId, next, previous);
+    const result = await likeService.getMyLikedSoundsV2(accountId, next, previous);
     return res.send(result);
   } catch (e) {
     console.log(e);
