@@ -61,7 +61,7 @@ exports.getMyLikedSounds = async (accountId, next, previous) => {
 
 exports.getMyLikedSoundsV2 = async (accountId, next, previous) => {
   try {
-    const likeDatas = await likeRepository.findAllV2({ accountId: ObjectId(accountId) }, { soundId: true, _id: false });
+    const likeDatas = await likeRepository.findAllV2({ accountId: ObjectId(accountId), isDeleted: false }, { soundId: true, _id: false });
     const likeIds = likeDatas.map((s) => s.soundId);
     const totalCount = await fileRepository.countDocuments({ _id: { $in: likeIds } });
     const query = { accountId: ObjectId(accountId), isDeleted: false };
