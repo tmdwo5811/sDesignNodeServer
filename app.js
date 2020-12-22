@@ -49,3 +49,11 @@ const port = 2500;
 server.listen(port, () => {
   console.log(`sDesign NODE SERVER - RUNNING ON ${port}`);
 });
+
+process.on("SIGINT", () => {
+  console.log("sDesign Server will Stop");
+  server.close(() => {
+    console.log("Server Closed");
+    process.exit(0);
+  });
+});

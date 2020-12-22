@@ -5,7 +5,7 @@ echo "start sDesign ShellScript"
 echo "start git pull"
 pwd
 if ! (git pull) then
-    echo "Git pull 실패"
+    echo "git pull 실패"
     exit 1
 else
 echo "complete update codes And restart pm2 Cluster."
