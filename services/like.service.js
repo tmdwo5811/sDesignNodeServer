@@ -68,7 +68,7 @@ exports.getMyLikedSoundsV2 = async (accountId, next, previous) => {
     const options = { sort: "updated", sortAscending: true, limit: 15 };
     const paginated = await likeRepository.paginate(query, options, next, previous);
     const ids = paginated.results.map((s) => s.soundId);
-    const populate = { path: "accountId", model: "account", select: "accountEmail accountName" };
+    const populate = { path: "accountId", model: "account", select: "accountEmail accountName accountImg" };
     let result = await fileRepository.findAll({ _id: { $in: ids } }, {}, populate, { sort: { created: -1 }, limit: ids.length });
     return {
       totalCount,
