@@ -1,6 +1,6 @@
 <script>
     async function confirmAccount(hashValue) {
-        const result = await fetch(`http://limeprj.xyz:2500/api/confirm/account?hashValue=${hashValue}`);
+        const result = await fetch(`http://api.rubansbike.com:2500/api/confirm/account?hashValue=${hashValue}`);
         if(result) window.location.href="https://www.naver.com"
     }
 </script>

@@ -23,7 +23,7 @@ exports.createAccount = async (req, res, next) => {
         from: "",
         to: accountEmail,
         subject: "Welcome to SignUp sDesign",
-        html: `<h1>sDesign 이메일 인증 부탁해요~!</h1><br><a href="http://limeprj.xyz:2500/api/confirm/account?hashValue=${
+        html: `<h1>sDesign 이메일 인증 부탁해요~!</h1><br><a href="http://api.rubansbike.com:2500/api/confirm/account?hashValue=${
           result[0]._id + "1"
         }">이곳을 눌러 인증!</a>`,
       };
@@ -79,11 +79,11 @@ exports.updateProfile = async (req, res, next) => {
     let filePath = null;
     if (!accountName && !req.file) return res.send("7777");
     if (req.file) {
-      filePath = req.file.filename == undefined ? false : `https://limeprj.xyz:2501/api/get/img/${req.file.filename}`;
+      filePath = req.file.filename == undefined ? false : `http://api.rubansbike.com:2500/api/get/img/${req.file.filename}`;
       if (filePath) {
         await fileService.removeProfileImg(accountId);
         const thumbnailName = await fileService.resizeImg(req.file.filename);
-        filePath = "https://limeprj.xyz:2501/api/get/img/" + thumbnailName;
+        filePath = "http://api.rubansbike.com:2500/api/get/img/" + thumbnailName;
       }
     }
     const filter = { _id: accountId };

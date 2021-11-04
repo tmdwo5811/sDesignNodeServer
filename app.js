@@ -45,7 +45,7 @@ db.once("open", () => {
 mongoose.connect(mongoUrl, mongoOptions);
 
 const server = http.createServer(app);
-const port = 2500;
+const port = 80;
 server.listen(port, () => {
   console.log(`sDesign NODE SERVER - RUNNING ON ${port}`);
 });

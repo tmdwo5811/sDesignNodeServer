@@ -7,7 +7,7 @@ exports.uploadFile = async (req, res, next) => {
     const { accountId } = req;
     const { soundName, tags, category } = req.body;
     if (!req.file) return res.send("파일을 업로드 해주세요.");
-    const filePath = `https://limeprj.xyz:2501/api/get/file/${req.file.filename}`;
+    const filePath = `http://api.rubansbike.com:2500/api/get/file/${req.file.filename}`;
     const uploadStatus = await fileService.createFileInfo(accountId, req.file.filename, filePath, soundName, tags, category);
 
     return res.send({
